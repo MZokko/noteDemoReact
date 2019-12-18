@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import {Validator,FormBuilder,FormGroup, Validators} from '@angular/forms';
+import {FormBuilder,FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-signup',
