@@ -19,4 +19,17 @@ export class AuthService {
       })
     })
   }
+
+  signIn(email,password)
+  {
+    return new Promise((resolve,reject)=>{
+      this.afAuth.auth.signInWithEmailAndPassword(email,password)
+      .then((response)=>{
+        resolve(response)
+      })
+      .catch((error)=>{
+        reject(error)
+      })
+    });
+  }
 }

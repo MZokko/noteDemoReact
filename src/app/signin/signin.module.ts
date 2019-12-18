@@ -13,7 +13,8 @@ import { SigninPage } from './signin.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    SigninPageRoutingModule
+    SigninPageRoutingModule,
+    ReactiveFormsModule,
   ],
   declarations: [SigninPage]
 })

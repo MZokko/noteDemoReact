@@ -5,24 +5,24 @@
 </ion-header>
 
 <ion-content>
-<form>
+<form [formGroup]="signInForm">
   <ion-list>
     <ion-item>
       <ion-label position="stack">Email</ion-label>
-      <ion-input type="email" placeHolder="user@domain.com" name="email"></ion-input>
+      <ion-input formControlName="email" type="email" placeHolder="user@domain.com" name="email"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="stack">Password</ion-label>
-      <ion-input type="Password" placeHolder="password" name="password"></ion-input>
+      <ion-input formControlName="password" type="Password" placeHolder="password" name="password"></ion-input>
     </ion-item>
 
-    <ion-button expand="block" type="submit" color="secondary" (click)="signIn()">sign in</ion-button>
+    <ion-button [disabled]="!signInForm.valid" expand="block" type="submit" color="secondary" (click)="signIn()">sign in</ion-button>
 
     <ion-item>
       <ion-label>Dont have an account yet ?</ion-label>
     </ion-item>
-    <ion-button expand="block" type="submit" color="primary" (click)="signUp()">sign up</ion-button>
+    <ion-button  expand="block" type="submit" color="primary" (click)="signUp()">sign up</ion-button>
 
   </ion-list>
 </form>
