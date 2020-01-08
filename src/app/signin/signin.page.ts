@@ -4,7 +4,7 @@ import { SignupPage } from '../signup/signup.page';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
-import{Validators, FormGroup, FormBuilder} from '@angular/forms';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 
 @Component({
@@ -13,54 +13,59 @@ import{Validators, FormGroup, FormBuilder} from '@angular/forms';
   styleUrls: ['./signin.page.scss'],
 })
 export class SigninPage implements OnInit {
-  signInForm:FormGroup;
-//reference to the modal controller add in the constructor
-  constructor( private modal:ModalController,
-     private auth:AuthService,
-     private router:Router,
-     private formBuilder:FormBuilder,
-     ) { }
+  signInForm: FormGroup;
+  //reference to the modal controller add in the constructor
+  constructor(private modal: ModalController,
+    private auth: AuthService,
+    private router: Router,
+    private formBuilder: FormBuilder,
+  ) { }
 
   ngOnInit() {
-this.signInForm = this.formBuilder.group({
-  email:['',[Validators.required, Validators.email]],
-  password:['',[Validators.required,Validators.minLength(6)]]
-})
+    this.signInForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+    })
   }
 
-  signIn(){
+  signIn() {
     const email = this.signInForm.controls.email.value;
     const password = this.signInForm.controls.password.value;
 
-    this.auth.signIn(email,password)
-    .then((response)=>{
-      this.router.navigate(['/notes'])
-    })
-    .catch((error)=>{
-      console.log(error)
-    })
+    this.auth.signIn(email, password)
+      .then((response) => {
+        this.signInForm.reset();
+        this.router.navigate(['/notes'])
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 
-  async signUp(){
+  async signUp() {
     const signUpModal = await this.modal.create({
-      component:SignupPage
+      component: SignupPage
     });
 
     signUpModal.onDidDismiss()
-    .then((response)=>{
-      //handle sign up response
-      const email = response.data.email;
-      const password = response.data.password;
+      .then((response) => {
 
-      this.auth.signUp(email,password)
-      .then((userData)=>{
-        //sign up success
-        this.router.navigate(['/notes']);
+        if (response.data) {
+          //handle sign up response
+          const email = response.data.email;
+          const password = response.data.password;
+
+          this.auth.signUp(email, password)
+            .then((userData) => {
+              //sign up success
+              this.router.navigate(['/notes']);
+            })
+            .catch((error) => {
+              //handle error
+            })
+        }
+
       })
-      .catch((error)=>{
-        //handle error
-      })
-    })
     await signUpModal.present();
   }
 

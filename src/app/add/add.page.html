@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="Close()"> 
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>add</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="addForm">
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked">Name</ion-label>
+        <ion-input type="text" placeholder="name for note" name="nane" formControlName="name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Note</ion-label>
+        <ion-textarea name="note" formControlName="note"></ion-textarea>
+      </ion-item>
+    </ion-list>
+    <ion-button type="submit" expand="block" clolor="primary" [disabled]="!addForm.valid" (click)="submit()">Add</ion-button>
+  </form>
+
+</ion-content>

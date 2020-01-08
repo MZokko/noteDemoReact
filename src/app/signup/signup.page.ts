@@ -25,4 +25,9 @@ constructor( private modal:ModalController, private formBuilder:FormBuilder) { }
       password : this.signUpForm.controls.password.value
     });
   }
+
+  //close the modal
+  close(){
+    this.modal.dismiss();
+  }
 }
